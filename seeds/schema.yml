@@ -1,0 +1,8 @@
+version: 2
+seeds:
+  - name: cookie_cats
+    description: >
+      Raw export of the Cookie Cats A/B test: one row per player who installed the game
+      while the test ran. Players were randomly assigned to have the first progress gate
+      at level 30 (gate_30, the existing design) or level 40 (gate_40). Fetched by
+      scripts/fetch_data.sh; not committed to this repo.

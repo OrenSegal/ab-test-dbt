@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: int_player_outcomes
+    description: One row per player with arm flag and activity flags.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+      - name: is_treatment
+        description: True for gate_40.
+        data_tests: [not_null]
+      - name: played_zero_rounds
+        description: Installed but never finished a round.
+      - name: reached_30_rounds
+        description: >
+          Played at least 30 rounds in 14 days. A rough proxy for reaching the first gate
+          (rounds are not levels, so this is approximate).

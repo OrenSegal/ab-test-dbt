@@ -1,0 +1,25 @@
+version: 2
+models:
+  - name: fct_player_experiment
+    description: Player-level experiment fact. Grain is one player. Input to analysis/experiment.py.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+      - name: variant
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['gate_30', 'gate_40']
+  - name: agg_experiment_arms
+    description: Arm-level summary. Grain is one arm. Means only; medians and tests live in the analysis script.
+    columns:
+      - name: variant
+        data_tests: [unique, not_null]
+      - name: players
+        description: Players assigned to the arm.
+      - name: retention_d7
+        description: Share of players retained at day 7 (primary metric).
+      - name: retention_d1
+        description: Share of players retained at day 1 (secondary metric).
+      - name: mean_game_rounds
+        description: Mean game rounds in first 14 days (guardrail; skewed, see README).

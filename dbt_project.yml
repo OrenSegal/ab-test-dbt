@@ -1,0 +1,17 @@
+name: ab_test_dbt
+version: "1.0.0"
+config-version: 2
+profile: ab_test_dbt
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+
+models:
+  ab_test_dbt:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table

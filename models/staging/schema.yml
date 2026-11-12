@@ -1,0 +1,24 @@
+version: 2
+models:
+  - name: stg_cookie_cats
+    description: Typed, renamed copy of the raw seed. One row per player.
+    columns:
+      - name: user_id
+        description: Player id. Primary key.
+        data_tests: [unique, not_null]
+      - name: variant
+        description: Assigned arm. gate_30 is control (existing design), gate_40 is treatment.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['gate_30', 'gate_40']
+      - name: game_rounds_14d
+        description: Game rounds the player played in the first 14 days after install.
+        data_tests: [not_null]
+      - name: retained_d1
+        description: Player came back and played 1 day after install.
+        data_tests: [not_null]
+      - name: retained_d7
+        description: Player came back and played 7 days after install.
+        data_tests: [not_null]
