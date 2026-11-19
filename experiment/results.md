@@ -3,7 +3,7 @@
 ## 1. Sample ratio check
 - gate_30: 44,700 players, gate_40: 45,489 players (total 90,189).
 - Share in gate_40: 50.44%. Chi-square vs 50/50: 6.90, p = 0.0086.
-- Stress test: if all 789 extra gate_40 players were never retained and are removed, gate_40 7-day retention becomes 18.52% vs 19.02% in gate_30.
+- Stress test: if all 789 extra gate_40 players were never retained and are removed, gate_40 7-day retention becomes 18.52% vs 19.02% in gate_30: difference -0.50 pp, 95% CI [-1.01, +0.01], p = 0.0561.
 
 ## 2. Power check (alpha 0.05 two-sided, power 0.80)
 - 7-day retention: baseline 19.02%; minimum detectable difference at these arm sizes = 0.73 pp; players per arm needed to detect 1.0 pp = 24,179.

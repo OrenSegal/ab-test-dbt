@@ -59,8 +59,14 @@ p(f"- gate_30: {n_c:,} players, gate_40: {n_t:,} players (total {n_c + n_t:,})."
 p(f"- Share in gate_40: {pct(n_t / (n_c + n_t))}. Chi-square vs 50/50: {chi2:.2f}, p = {srm_p:.4f}.")
 # Worst case for the SRM: every extra gate_40 player was a non-retained player. Drop them all.
 excess = n_t - n_c
+s_c, s_t = ctl.retained_d7.mean(), trt.retained_d7.sum() / n_c
+s_diff = s_t - s_c
+s_se = np.sqrt(s_c * (1 - s_c) / n_c + s_t * (1 - s_t) / n_c)
+s_pool = (s_c + s_t) / 2   # equal arm sizes after the removal
+s_p = 2 * stats.norm.sf(abs(s_diff) / np.sqrt(s_pool * (1 - s_pool) * 2 / n_c))
 p(f"- Stress test: if all {excess:,} extra gate_40 players were never retained and are removed, "
-  f"gate_40 7-day retention becomes {pct(trt.retained_d7.sum() / n_c)} vs {pct(ctl.retained_d7.mean())} in gate_30.")
+  f"gate_40 7-day retention becomes {pct(s_t)} vs {pct(s_c)} in gate_30: difference {100 * s_diff:+.2f} pp, "
+  f"95% CI [{100 * (s_diff - Z_A * s_se):+.2f}, {100 * (s_diff + Z_A * s_se):+.2f}], p = {s_p:.4f}.")
 
 # 2. Power / minimum detectable effect, using the control baseline.
 p("\n## 2. Power check (alpha 0.05 two-sided, power 0.80)")
