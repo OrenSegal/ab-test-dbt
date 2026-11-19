@@ -1,7 +1,7 @@
 version: 2
 models:
   - name: fct_player_experiment
-    description: Player-level experiment fact. Grain is one player. Input to analysis/experiment.py.
+    description: Player-level experiment fact. Grain is one player. Input to experiment/analyze.py.
     columns:
       - name: user_id
         data_tests: [unique, not_null]
